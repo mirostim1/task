@@ -1,0 +1,17 @@
+{
+    "name": "miro/task2",
+    "description": "Simple application for listing, storing and editing entities",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Miro\\Task2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Miroslav",
+            "email": "mirostim1@gmail.com"
+        }
+    ],
+    "require": {}
+}
