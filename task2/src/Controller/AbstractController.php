@@ -10,7 +10,7 @@ class AbstractController {
 
     public function __construct()
     {
-        $this->config = Config::getAppConfig();
+        $this->config = Config::getInstance()->getAppConfig();
     }
 
     public function renderView(string $view, array $vars = [])

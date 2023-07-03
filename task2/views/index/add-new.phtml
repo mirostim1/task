@@ -1,5 +1,80 @@
 <?php require '/var/www/task/task2/views/header.phtml' ?>
 
-<h1>Add new</h1>
+<div class="title">
+    <h1>Add New Item</h1>
+</div>
+<div class="text-right">
+    <a href="/" class="btn btn-info text-right">Back</a>
+</div>
+
+<?php if (isset($this->status) && $this->status) { ?>
+    <div class="alert alert-<?= $this->status === 'success' ? 'success' : 'danger' ?>">
+        <?= $this->action . ' status: ' . ($this->status === 'success' ? 'success' : 'error') ?>
+    </div>
+<?php } ?>
+
+<?php if (isset($this->message) && $this->message) { ?>
+    <div class="alert alert-danger">
+        <?= $this->message ?>
+    </div>
+<?php } ?>
+
+<form action="/add-new" method="POST">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text"
+               name="name"
+               class="form-control"
+               placeholder="Enter name"
+               maxlength="255"
+               required
+        >
+    </div>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text"
+               name="title"
+               class="form-control"
+               size="120"
+               maxlength="255"
+               placeholder="Enter title"
+               value="<?= isset($this->item) ? $this->item->getTitle(): '' ?>"
+               required
+        >
+    </div>
+    <div class="form-group">
+        <label for="title">Notes:</label>
+        <textarea
+               name="notes"
+               class="form-control"
+               placeholder="Enter notes"
+        ><?= isset($this->item) ? $this->item->getNotes(): '' ?></textarea>
+    </div>
+    <div class="form-group">
+        <label for="title">Score:</label>
+        <input  type="number"
+                name="score"
+                class="form-control"
+                placeholder="Enter score (1-100)"
+                min="1"
+                max="100"
+                value="<?= isset($this->item) ? $this->item->getScore(): '' ?>"
+                required
+        >
+    </div>
+    <div class="form-group">
+        <label for="title">Priority:</label>
+        <input  type="number"
+                name="priority"
+                class="form-control"
+                placeholder="Enter priority (0 or 1)"
+                min="0"
+                max="1"
+                value="<?= isset($this->item) ? $this->item->getPriority(): '' ?>"
+                required
+        >
+    </div>
+    <button type="submit" name="submit" class="btn btn-info" value="submit">Submit</button>
+</form>
 
 <?php require '/var/www/task/task2/views/footer.phtml' ?>

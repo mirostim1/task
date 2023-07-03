@@ -7,9 +7,13 @@ use Task2\Controller\ErrorController;
 
 const CONTROLLER_CLASS = 'Task2\Controller\IndexController';
 
-if (in_array($_SERVER['REQUEST_URI'], array_keys($routes))) {
+if ($_SERVER['PATH_INFO'] === null) {
+    $_SERVER['PATH_INFO'] = '/';
+}
+
+if (in_array($_SERVER['PATH_INFO'], array_keys($routes))) {
     $controller = new (CONTROLLER_CLASS);
-    $controller->{$routes[$_SERVER['REQUEST_URI']]}();
+    $controller->{$routes[$_SERVER['PATH_INFO']]}();
 } else {
     (new ErrorController())->renderErrorPage([
         'message' => 'Page not found',

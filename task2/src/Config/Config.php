@@ -2,11 +2,15 @@
 
 namespace Task2\Config;
 
+use Task2\Traits\Singleton;
+
 class Config {
 
-    public static function getAppConfig()
+    use Singleton;
+
+    public function getAppConfig()
     {
-        include_once '/var/www/task/task2/config/app.php';
+        require '/var/www/task/task2/config/app.php';
         return (object) $config;
     }
 }
