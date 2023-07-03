@@ -2,16 +2,15 @@
 
 namespace Task2\Controller;
 
-include '../../config/app.php';
+use Task2\Config\Config;
 
-var_dump();
+class AbstractController {
 
-abstract class AbstractController {
     private $config;
 
     public function __construct()
     {
-        $this->config = $config;
+        $this->config = Config::getAppConfig();
     }
 
     public function renderView(string $view, array $vars = [])
@@ -20,11 +19,13 @@ abstract class AbstractController {
             $this->initializeVars($vars);
         }
 
-        require_once self::VIEWS_PATH . $view;
+        require_once $this->config->views_path . $view;
     }
 
     private function initializeVars(array $vars)
     {
-
+        foreach ($vars as $key => $var) {
+            $this->{$key} = $var;
+        }
     }
 }

@@ -11,16 +11,16 @@ class IndexController extends AbstractController {
 
     public function addNew()
     {
-        $this->renderView('/add-new/index.phtml', []);
+        $this->renderView('/index/add-new.phtml', []);
     }
 
     public function listAll()
     {
-        $this->renderView('/list-all/index.phtml', []);
+        $this->renderView('/index/list-all.phtml', []);
     }
 
     public function editItem()
     {
-        $this->renderView('/edit-item/index.phtml', []);
+        $this->renderView('/index/edit-item.phtml', []);
     }
 }
