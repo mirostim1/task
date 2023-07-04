@@ -18,7 +18,7 @@ class ItemRepository {
     public function getAllItems(): array
     {
         $stmt = $this->dbConnection->getDB()->prepare("SELECT id, name, title, notes, score, priority, created_at,
-            updated_at FROM tasks ORDER BY created_at DESC");
+            updated_at FROM `items` ORDER BY created_at DESC");
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_OBJ);
 
@@ -28,7 +28,7 @@ class ItemRepository {
     public function getOneItem(int $id)
     {
         $stmt = $this->dbConnection->getDB()->prepare("SELECT id, name, title, notes, score, priority, created_at,
-            updated_at FROM tasks WHERE id = :id LIMIT 1");
+            updated_at FROM `items` WHERE id = :id LIMIT 1");
         $stmt->execute(['id' => $id]);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
 
@@ -37,7 +37,7 @@ class ItemRepository {
 
     public function saveNewItem(Item $item) {
         $stmt = $this->dbConnection->getDB()->prepare("
-            INSERT INTO `tasks`(name, title, notes, score, priority, created_at, updated_at) VALUES 
+            INSERT INTO `items`(name, title, notes, score, priority, created_at, updated_at) VALUES 
             (:name, :title, :notes, :score, :priority, :created_at, :updated_at)
         ");
 
@@ -56,7 +56,7 @@ class ItemRepository {
 
     public function updateItem(Item $item) {
         $stmt = $this->dbConnection->getDB()->prepare("
-            UPDATE `tasks` SET 
+            UPDATE `items` SET 
                 name = :name,
                 title = :title, 
                 notes = :notes, 
@@ -81,7 +81,7 @@ class ItemRepository {
 
     public function getName(string $name)
     {
-        $stmt = $this->dbConnection->getDB()->prepare("SELECT id, name FROM tasks WHERE name = :name LIMIT 1");
+        $stmt = $this->dbConnection->getDB()->prepare("SELECT id, name FROM `items` WHERE name = :name LIMIT 1");
         $stmt->execute([
             'name' => $name,
         ]);

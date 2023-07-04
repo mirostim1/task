@@ -2,6 +2,7 @@
 
 namespace Task2\Controller;
 
+use Task2\Database\Migration;
 use Task2\Model\Item;
 use Task2\Repository\ItemRepository;
 use Task2\Validation\ItemValidation;
@@ -158,5 +159,17 @@ class IndexController extends AbstractController {
         $this->renderView('/index/edit-item.phtml', [
             'item' => $itemObj,
         ]);
+    }
+
+    public function runMigration()
+    {
+        try {
+            $migration = new Migration();
+            $migration->runMigration();
+        } catch (\Exception $e) {
+            throw new \RuntimeException($e->getMessage(), 500);
+        }
+
+        echo 'Migration executed successfully.';
     }
 }
