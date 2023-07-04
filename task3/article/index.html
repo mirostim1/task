@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="../assets/css/article.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 article-title">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 article">
+            <div class="article-image"></div>
+            <div class="article-author"></div>
+            <div class="article-category text-right"></div>
+            <div class="article-content"></div>
+            <div class="article-source"></div>
+            <div class="article-tags"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.getJSON('../data/data.json', function(data) {
+            $('head title', window.parent.document).text(data.title);
+
+            let title = '<h1>' + data.title + '</h1>';
+            $('.article-title').html(title);
+
+            let image = '<img src="' + data.image_url +'" class="img-responsive">';
+            $('.article-image').html(image);
+
+            let author = 'Author: ' + data.author;
+            $('.article-author').html(author);
+
+            let category = 'Category: ' + data.subject;
+            $('.article-category').html(category);
+
+            let content = data.content;
+            $('.article-content').html(content);
+
+            let source = '<a href="' + data.source_url + '" target="_blank">Read more on this link</a>';
+            $('.article-source').html(source);
+
+            let tag = '';
+            $('.article-tags').empty(tag);
+            $.each(data.custom, function(index, custom) {
+                if (custom.key === 'Tag') {
+                    tag = '<a href="#" class="btn btn-success tag">' + custom.value + '</a>';
+                    $('.article-tags').append(tag);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

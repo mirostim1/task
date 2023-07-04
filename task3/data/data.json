@@ -1,0 +1,26 @@
+{
+  "id": 123,
+  "language": "NL",
+  "subject": "Newsletter",
+  "title": "Newsletter item",
+  "image_url": "http://project1.local/task3/assets/imgs/img1.jpg",
+  "description": "An example piece of content",
+  "content": "<p>This is content</p>",
+  "link": "http://project1.local/task3/article",
+  "source_url": "https://website.example/source",
+  "author": "Famous Person",
+  "custom": [
+    {
+      "key": "Color",
+      "value": "#000000"
+    },
+    {
+      "key": "Tag",
+      "value": "Cars"
+    },
+    {
+      "key": "Tag",
+      "value": "Music"
+    }
+  ]
+}
